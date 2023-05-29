@@ -50,5 +50,6 @@
       }
     }
   },
+  "parser": "@babel/eslint-parser",
   "plugins": ["react", "prettier", "import"]
 }

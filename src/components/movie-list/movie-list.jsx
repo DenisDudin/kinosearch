@@ -1,18 +1,13 @@
-// import { Alert, Spin } from "antd";
-
 import './movie-list.scss';
 import { MovieCard } from '../movie-card/index.js';
 
-const MovieList = () => {
-  return (
-    <section className="movies-container">
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-    </section>
-  );
+const MovieList = ({ props }) => {
+  const { movieList } = props;
+  const movies = movieList.map((movie) => {
+    return <MovieCard key={movie.id} movie={movie} />;
+  });
+
+  return <section className="movies-container">{movies}</section>;
 };
 
 export default MovieList;

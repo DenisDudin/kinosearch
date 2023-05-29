@@ -1,19 +1,25 @@
 import { Input } from 'antd';
+import debounce from 'lodash.debounce';
+import { Component } from 'react';
+class SearchInput extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: props.text,
+    };
+  }
 
-// const debounce = (fn, time) => {
-//   let debounceTimer;
-//   return function (...data) {
-//     clearTimeout(time);
-//     time = setTimeout(() => {
-//       fn.apply(this, data);
-//       clearTimeout(time);
-//       time = null;
-//     }, time);
-//   };
-// };
+  render() {
+    const { onSearchChange } = this.props;
+    const { text } = this.state;
 
-const SearchInput = () => {
-  return <Input />;
-};
+    const debouncedSearch = debounce((e) => {
+      this.setState({ text: e.target.value });
+      onSearchChange(e.target.value);
+    }, 1500);
+
+    return <Input onChange={debouncedSearch} defaultValue={text} placeholder="Type to search..." size="large" />;
+  }
+}
 
 export default SearchInput;

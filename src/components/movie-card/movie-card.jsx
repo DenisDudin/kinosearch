@@ -4,29 +4,34 @@ import './movie-card.scss';
 
 const COUNT_STARS = 10;
 
-const MovieCard = () => {
+const MovieCard = (props) => {
+  const {
+    original_title: title,
+    overview: description,
+    vote_average: vote,
+    release_date: date,
+    poster_path: img,
+  } = props.movie;
+
   return (
     <div className="movie-card">
       <div className="movie-card__img-container">
-        <img src="http://placehold.it/250x400/" alt="" className="movie-card__img" />
+        <img src={`https://image.tmdb.org/t/p/w500/${img}`} alt={title} className="movie-card__img" />
       </div>
 
       <div className="movie-card__title">
-        <p className="movie-card__name">The way back</p>
-        <div className="movie-card__score">5.5</div>
+        <p className="movie-card__name">{title}</p>
+        <div className="movie-card__score">{vote.toFixed(1)}</div>
       </div>
 
-      <p className="movie-card__date">March 5, 2020</p>
+      <p className="movie-card__date">{date}</p>
 
       <div className="movie-card__genres genres">
         <div className="genres__item">Action</div>
         <div className="genres__item">Drama</div>
       </div>
 
-      <p className="movie-card__description">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet voluptas, est sequi voluptatem quaerat ab autem
-        impedit harum perferendis totam optio voluptate illum fuga accusantium sit provident nobis quasi animi?
-      </p>
+      <p className="movie-card__description">{description}</p>
 
       <Rate className="movie-card__rate" count={COUNT_STARS} />
     </div>
