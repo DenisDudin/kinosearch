@@ -26,9 +26,9 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.text !== prevState.text) {
+    if (this.state.text !== prevState.text || this.state.currentPage !== prevState.currentPage) {
       const list = new MovieService();
-      list.getMovies(this.state.text, this.currentPage).then(this.createMovieList).catch(this.onError);
+      list.getMovies(this.state.text, this.state.currentPage).then(this.createMovieList).catch(this.onError);
     }
   }
 
@@ -51,15 +51,21 @@ class App extends Component {
   };
 
   onSearchChange = (text) => {
-    this.setState({ text: text });
+    this.setState({ text: text, loading: true, currentPage: 1 });
   };
 
-  // onChangeTab = (tab) => {
-
-  // }
+  onChangeTab = (e) => {
+    this.setState((state) => {
+      return {
+        ...state,
+        currentPage: e,
+        loading: true,
+      };
+    });
+  };
 
   render() {
-    const { totalPages, currentPage, totalResults, error, loading, hasMovies, text } = this.state;
+    const { totalPages, currentPage, totalResults, error, loading, hasMovies, text, movieList } = this.state;
     const hasDate = !(error || loading);
 
     return (
@@ -79,7 +85,14 @@ class App extends Component {
         ) : null}
         {loading ? <Spin size="large" /> : null}
         {hasDate ? <MovieList props={this.state} /> : null}
-        {totalResults ? <PaginationComponent totalPages={totalPages} currentPage={currentPage} /> : null}
+        {totalResults ? (
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={currentPage}
+            movieList={movieList}
+            onChangeTab={this.onChangeTab}
+          />
+        ) : null}
       </main>
     );
   }

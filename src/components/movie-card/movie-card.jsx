@@ -6,7 +6,7 @@ import './movie-card.scss';
 const COUNT_STARS = 10;
 const MAX_DESCRIPTION = 200;
 const MIN_TITLE = 17;
-const NO_DATE = '--.--.--';
+const NO_DATE = 'Unknown';
 const FORMAT_DATE = 'MMMM d, yyyy';
 
 const cutText = (text, length) => {
