@@ -1,11 +1,10 @@
 import { Pagination } from 'antd';
 
-// const MAX_CARDS = 20;
 const PaginationComponent = (props) => {
-  const { totalPages, currentPage, onChangeTab } = props;
+  const { totalPages, currentPage, onChangePage } = props;
 
   return (
-    <Pagination current={currentPage} total={totalPages} pageSize={1} showSizeChanger={false} onChange={onChangeTab} />
+    <Pagination current={currentPage} total={totalPages} pageSize={1} showSizeChanger={false} onChange={onChangePage} />
   );
 };
 
