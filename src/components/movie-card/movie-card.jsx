@@ -8,6 +8,7 @@ const MAX_DESCRIPTION = 200;
 const MIN_TITLE = 17;
 const NO_DATE = 'Unknown';
 const FORMAT_DATE = 'MMMM d, yyyy';
+const MAX_GENRES = 4;
 
 const cutText = (text, length) => {
   if (text.length > length) {
@@ -21,21 +22,27 @@ const cutText = (text, length) => {
 
 const colorVote = (vote) => {
   let classColor = '';
-  if (vote > 7) {
-    classColor = 'movie-card__score--best';
-  } else if (vote > 5) {
-    classColor = 'movie-card__score--good';
-  } else if (vote > 3) {
-    classColor = 'movie-card__score--normal';
-  } else {
-    classColor = 'movie-card__score--bad';
+  switch (vote) {
+    case vote > 7:
+      classColor = 'movie-card__score--best';
+      break;
+    case vote > 5:
+      classColor = 'movie-card__score--good';
+      break;
+    case vote > 3:
+      classColor = 'movie-card__score--normal';
+      break;
+    default:
+      classColor = 'movie-card__score--bad';
+      break;
   }
+
   return 'movie-card__score ' + classColor;
 };
 
 const getGenres = (genres, genresIds) => {
   if (!genresIds.length) return 'Unknown genre';
-  if (genresIds.length > 4) genresIds.length = 4;
+  if (genresIds.length > MAX_GENRES) genresIds.length = MAX_GENRES;
 
   const genreList = genres.reduce((list, genre) => {
     if (genresIds.includes(genre.id)) {

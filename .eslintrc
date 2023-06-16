@@ -28,6 +28,7 @@
     "linebreak-style": [0, "unix"],
     "semi": ["error", "always"],
     "react/react-in-jsx-scope": "off",
+    "indent": ["off", 2],
     "react/prop-types": 0,
     "import/no-unresolved": [2, { "caseSensitive": false }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
